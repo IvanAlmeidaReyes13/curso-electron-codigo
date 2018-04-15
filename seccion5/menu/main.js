@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, MenuItem } = require('electron')
+const { app, BrowserWindow, Menu, MenuItem, Tray } = require('electron')
 
 const path = require('path')
 const url = require('url')
@@ -67,6 +67,8 @@ menu.append(menuItem2)
 
 let menu2 = Menu.buildFromTemplate(menuTemplate)
 
+let tray = null
+
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 800, height: 600 })
@@ -94,6 +96,16 @@ function createWindow() {
   mainWindow.webContents.on('context-menu', (e, args) => {
     menu.popup(mainWindow)
   })
+
+  tray = new Tray("space-invaders.png")
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Item1', type: 'radio'},
+    {label: 'Item2', type: 'radio'},
+    {label: 'Item3', type: 'radio', checked: true},
+    {label: 'Item4', type: 'radio'}
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
 }
 
 // This method will be called when Electron has finished
