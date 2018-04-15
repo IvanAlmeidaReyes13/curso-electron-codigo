@@ -90,6 +90,10 @@ function createWindow() {
   })
 
   Menu.setApplicationMenu(menu2)
+
+  mainWindow.webContents.on('context-menu', (e, args) => {
+    menu.popup(mainWindow)
+  })
 }
 
 // This method will be called when Electron has finished
