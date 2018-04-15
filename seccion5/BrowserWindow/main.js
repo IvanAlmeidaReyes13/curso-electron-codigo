@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron')
+const { app, BrowserWindow, dialog, session } = require('electron')
 const windowStateKeeper = require('electron-window-state');
 
 const path = require('path')
@@ -13,7 +13,7 @@ function createWindow() {
   let mainWindowState = new windowStateKeeper({
     defaultWidth: 800,
     defaultHeight: 600
-  })
+  }) 
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -31,8 +31,6 @@ function createWindow() {
     slashes: true
   }))
 
-
-
   mainWindow.webContents.on('new-window', (e, url) => {
     console.log(url)
     e.preventDefault()
@@ -46,6 +44,15 @@ function createWindow() {
     modalWindow.loadURL(url)
   })
 
+  // setTimeout(() => {
+  //   mainWindow.setFullScreen(true)
+  // }, 2000)
+
+  // mainWindow.on('enter-full-screen', () => {
+  //   setTimeout(() => {
+  //     mainWindow.setFullScreen(false)
+  //   }, 2000)
+  // })
 
   mainWindow.webContents.on('media-started-playing', (e, a) => {
     console.log('el vídeo comienza a reproducirse')
