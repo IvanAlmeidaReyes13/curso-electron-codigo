@@ -17,3 +17,4 @@ ipcRenderer.on('canal_respuesta', (event, arg) => {
 ipcRenderer.on('elcanal', (event, arg) => {
     console.log(arg)
  })
+ 

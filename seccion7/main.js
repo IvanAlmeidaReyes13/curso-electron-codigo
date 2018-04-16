@@ -18,6 +18,7 @@ function createWindow () {
     slashes: true
   }))
 
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
@@ -27,23 +28,6 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-  })
-
-  // Recibe mensaje síncrono
-  ipcMain.on('elcanal', (event, arg) => {
-    console.log(arg)
-    event.returnValue =  'la respuesta desde main'
-  })
- 
-  // Recibe mensaje asíncrono
-  ipcMain.on('elcanalasync', (event, arg) => {
-    console.log(arg)
-    event.sender.send('canal_respuesta', 'la respuesta async desde main')
-  })
-
-  // Envía mensaje asíncrono
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.send('elcanal', 'el mensaje')
   })
 }
 
